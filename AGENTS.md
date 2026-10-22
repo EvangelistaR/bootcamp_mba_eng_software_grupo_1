@@ -1,4 +1,4 @@
-# AGENTS.md · v0
+# AGENTS.md · v1
 
 Harness do agente deste repositório. Vale para qualquer ferramenta (Claude Code, Copilot, Cursor, Kiro). Evolui a cada checkpoint; registre as mudanças no fim do arquivo.
 
@@ -17,12 +17,24 @@ Se o código e a especificação divergirem, a especificação vence. Se a espec
 
 ## Stack
 
-*A definir em ADR até o checkpoint 04.* Já fixado pela especificação:
+Definida em [ADR 0001](docs/adr/0001-stack-tecnologica.md):
+
+- Ruby on Rails 8, monólito.
+- Hotwire (Turbo + Stimulus), renderização no servidor; PWA via manifest e service worker.
+- PostgreSQL. A unicidade da agenda é garantida no banco, com *exclusion constraint* (`btree_gist`).
+- Solid Queue para jobs, com tarefa recorrente para lembretes e expiração de reservas.
+- RSpec (`rspec-rails`) para testes.
+- Bullet (só em `development` e `test`) para detectar N+1.
+- RuboCop (`rubocop-rails`, `rubocop-rspec`) como linter.
+
+Já fixado pela especificação:
 
 - Frontend PWA, *mobile first*, instalável.
 - Reserva temporária de horário por 5 minutos, com prioridade do primeiro clique e confirmação atômica.
 - Tarefa agendada para os lembretes, a cada 30 ou 60 minutos.
 - Integrações: WhatsApp (canal oficial), e-mail transacional, anexo de calendário `.ics`.
+
+Ainda sem ADR (não implemente até existir): hospedagem e deploy, provedores de WhatsApp e e-mail, assinatura digital de contratos, armazenamento de fotos. Isole cada integração atrás de uma interface.
 
 Não adicione framework, biblioteca ou serviço sem ADR aprovado pelo Tech Lead.
 
@@ -59,3 +71,4 @@ Ver a tabela de estrutura no [README.md](README.md).
 | Versão | Checkpoint | Mudança |
 |--|--|--|
 | v0 | 01 | Versão inicial: fonte da verdade, regras, segurança e limites. Stack a definir. |
+| v1 | 03 | Stack definida conforme ADR 0001 (Rails 8, Hotwire, PostgreSQL, Solid Queue, RSpec, Bullet, RuboCop). Pendências de ADR listadas. |

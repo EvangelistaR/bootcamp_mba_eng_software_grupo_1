@@ -36,6 +36,22 @@ Papéis do bootcamp (um por integrante; todos operam agentes e revisam PRs):
 | PRD | [docs/produto/PRD.md](docs/produto/PRD.md) |
 | Especificação funcional (histórias e critérios de aceite) | [docs/specs/especificacao-funcional.md](docs/specs/especificacao-funcional.md) |
 | Harness do agente | [AGENTS.md](AGENTS.md) |
+| ADR 0001 · Stack tecnológica | [docs/adr/0001-stack-tecnologica.md](docs/adr/0001-stack-tecnologica.md) |
+
+## Stack
+
+Definida no [ADR 0001](docs/adr/0001-stack-tecnologica.md):
+
+| Camada | Escolha |
+|--|--|
+| Framework | Ruby on Rails 8 (monólito) |
+| Frontend | Hotwire (Turbo + Stimulus), PWA |
+| Banco de dados | PostgreSQL |
+| Jobs e agendamento | Solid Queue |
+| Testes | RSpec |
+| Qualidade | Bullet (N+1) e RuboCop |
+
+Hospedagem, provedores de WhatsApp e e-mail, assinatura digital e armazenamento de fotos seguem pendentes de ADR.
 
 ## Estrutura do repositório
 
