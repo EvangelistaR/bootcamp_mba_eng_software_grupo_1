@@ -1,0 +1,237 @@
+<title>Lean Canvas Clínica Estética</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;800&family=Instrument+Sans:wght@400;500;600&display=swap">
+<style>
+/* Layout: classic Lean Canvas, 5 pastel columns with icon badges on the top edge, costs and revenue across the base; stacks on phones. */
+:root {
+  --bg: #ffffff;
+  --fg: #1d1d22;
+  --muted: #55555f;
+  --badge: #ffffff;
+  --c-problema: #cfe6f8;
+  --c-solucao: #d2f1ee;
+  --c-metricas: #dde2f8;
+  --c-puv: #e4d6f6;
+  --c-vantagem: #fae3ec;
+  --c-canais: #f9dbd3;
+  --c-segmentos: #fae4d1;
+  --c-base: #fbf6d6;
+  --hyp: #9a2f5b;
+  --hyp-soft: #ffffffb3;
+  --display: "Poppins", "Segoe UI", system-ui, sans-serif;
+  --body: "Instrument Sans", "Segoe UI", system-ui, sans-serif;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #131318; --fg: #ecebf2; --muted: #a9a8b6; --badge: #24242c;
+    --c-problema: #1b2d3c; --c-solucao: #19332f; --c-metricas: #22263d; --c-puv: #2c2240;
+    --c-vantagem: #3a2330; --c-canais: #3a2724; --c-segmentos: #3a2b1d; --c-base: #33301b;
+    --hyp: #f0a3c4; --hyp-soft: #00000040; color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #131318; --fg: #ecebf2; --muted: #a9a8b6; --badge: #24242c;
+  --c-problema: #1b2d3c; --c-solucao: #19332f; --c-metricas: #22263d; --c-puv: #2c2240;
+  --c-vantagem: #3a2330; --c-canais: #3a2724; --c-segmentos: #3a2b1d; --c-base: #33301b;
+  --hyp: #f0a3c4; --hyp-soft: #00000040; color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body { background: var(--bg); color: var(--fg); font-family: var(--body); font-size: 0.86rem; line-height: 1.45; padding-inline: 24px; padding-block: 28px 40px; }
+.wrap { max-width: 1240px; margin: 0 auto; display: flex; flex-direction: column; gap: 14px; }
+header { text-align: center; display: flex; flex-direction: column; gap: 4px; align-items: center; }
+h1 { font-family: var(--display); font-weight: 800; font-size: clamp(2rem, 4.5vw, 3rem); margin: 0; line-height: 1.1; }
+.sub { color: var(--muted); margin: 0; max-width: 70ch; text-wrap: balance; }
+.legend { display: flex; flex-wrap: wrap; justify-content: center; gap: 6px 16px; color: var(--muted); font-size: 0.76rem; margin-top: 4px; }
+.legend span { display: inline-flex; align-items: center; gap: 6px; }
+
+.canvas { display: grid; grid-template-columns: repeat(10, minmax(0, 1fr)); gap: 30px 6px; padding-top: 26px; }
+.block { position: relative; border-radius: 4px; padding: 30px 16px 20px; min-width: 0; display: flex; flex-direction: column; gap: 22px; text-align: center; }
+.part { display: flex; flex-direction: column; gap: 10px; }
+.problema { grid-column: 1 / 3; grid-row: 1 / 3; background: var(--c-problema); }
+.solucao { grid-column: 3 / 5; grid-row: 1; background: var(--c-solucao); }
+.metricas { grid-column: 3 / 5; grid-row: 2; background: var(--c-metricas); }
+.puv { grid-column: 5 / 7; grid-row: 1 / 3; background: var(--c-puv); }
+.vantagem { grid-column: 7 / 9; grid-row: 1; background: var(--c-vantagem); }
+.canais { grid-column: 7 / 9; grid-row: 2; background: var(--c-canais); }
+.segmentos { grid-column: 9 / 11; grid-row: 1 / 3; background: var(--c-segmentos); }
+.custos { grid-column: 1 / 6; grid-row: 3; background: var(--c-base); text-align: left; padding: 22px 26px; }
+.receita { grid-column: 6 / 11; grid-row: 3; background: var(--c-base); text-align: left; padding: 22px 26px; }
+
+.badge { position: absolute; top: -20px; left: 50%; transform: translateX(-50%); width: 40px; height: 40px; border-radius: 50%; background: var(--badge); display: grid; place-items: center; color: var(--fg); box-shadow: 0 0 0 4px var(--bg); }
+.custos .badge { top: 50%; left: -14px; transform: translateY(-50%); }
+.receita .badge { top: 50%; left: auto; right: -14px; transform: translateY(-50%); }
+.badge svg { width: 20px; height: 20px; }
+
+h2 { font-family: var(--display); font-weight: 600; font-size: 1.02rem; line-height: 1.25; margin: 0; text-wrap: balance; }
+ul { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 8px; }
+.custos ul, .receita ul { list-style: disc; padding-left: 1.1em; gap: 6px; }
+.puv .big { font-weight: 600; font-size: 0.98rem; margin: 0; text-wrap: balance; }
+.puv p { margin: 0; }
+.ref { font-size: 0.68rem; color: var(--muted); font-weight: 600; white-space: nowrap; }
+.hyp { display: inline-block; font-size: 0.62rem; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase; color: var(--hyp); background: var(--hyp-soft); border-radius: 3px; padding: 0 5px; vertical-align: 1px; }
+.note { color: var(--muted); margin: 0; }
+.cols { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 6px 24px; margin-top: 10px; }
+footer { color: var(--muted); font-size: 0.76rem; text-align: center; max-width: 90ch; margin: 6px auto 0; }
+
+@media (max-width: 920px) {
+  .canvas { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .block { grid-column: auto !important; grid-row: auto !important; }
+  .puv, .custos, .receita { grid-column: 1 / -1 !important; }
+  .puv { order: -1; }
+  .custos .badge, .receita .badge { top: -20px; left: 50%; right: auto; transform: translateX(-50%); }
+  .custos, .receita { padding-top: 30px; }
+  .custos h2, .receita h2 { text-align: center; }
+}
+@media (max-width: 560px) {
+  body { padding-inline: 16px; }
+  .canvas { grid-template-columns: minmax(0, 1fr); }
+}
+</style>
+
+<div class="wrap">
+  <header>
+    <h1>Lean Canvas</h1>
+    <p class="sub">Gestão de Clínicas de Estética · plataforma web instalável (PWA) para agenda, documentação clínica e contratos · escopo do MVP</p>
+    <div class="legend">
+      <span><span class="ref">HU09</span> referência na especificação funcional</span>
+      <span><span class="hyp">hipótese</span> não consta nas fontes, validar</span>
+    </div>
+  </header>
+
+  <main class="canvas">
+    <section class="block problema">
+      <span class="badge" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="11" width="14" height="10" rx="2" fill="currentColor"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg></span>
+      <div class="part">
+        <h2>Problemas</h2>
+        <ul>
+          <li>Marcações duplicadas quando duas pessoas escolhem o mesmo horário ao mesmo tempo</li>
+          <li>Faltas: o paciente esquece ou não confirma presença</li>
+          <li>Anamnese e fotos de evolução dispersas, sem histórico único</li>
+          <li>Insegurança jurídica em procedimentos invasivos sem contrato assinado e guardado</li>
+          <li>Dados de saúde e imagens exigem tratamento conforme a LGPD</li>
+        </ul>
+      </div>
+      <div class="part">
+        <h2>Alternativas existentes</h2>
+        <ul>
+          <li>Agenda em papel, planilha ou conversa de WhatsApp <span class="hyp">hipótese</span></li>
+          <li>Termos de consentimento em papel <span class="hyp">hipótese</span></li>
+          <li>Aplicativos que exigem download em loja</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="block solucao">
+      <span class="badge" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg></span>
+      <h2>Soluções</h2>
+      <ul>
+        <li>Horário reservado por 5 minutos para quem clicou primeiro <span class="ref">HU09</span></li>
+        <li>Lembrete 24h antes por WhatsApp com "Sim/Não" e por e-mail com anexo de calendário <span class="ref">HU21–23</span></li>
+        <li>Histórico do paciente com anamnese em PDF e fotos Antes/Depois <span class="ref">HU14–17</span></li>
+        <li>Contrato com variáveis, assinado na tela e guardado em PDF não editável <span class="ref">HU18–20</span></li>
+      </ul>
+    </section>
+
+    <section class="block metricas">
+      <span class="badge" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 4h18"/><rect x="4" y="4" width="16" height="11" rx="1"/><path d="M12 15v3M8 21l4-3 4 3"/><path d="M7.5 12l3-3 2 2 3.5-3.5"/></svg></span>
+      <h2>Métricas-chave</h2>
+      <ul>
+        <li>Taxa de faltas antes e depois da adoção</li>
+        <li>Marcações duplicadas: meta zero</li>
+        <li>% de lembretes respondidos com "Sim"</li>
+        <li>% de agendamentos feitos pelo próprio paciente</li>
+        <li>% de procedimentos invasivos com contrato assinado</li>
+        <li>Reservas expiradas sem confirmação</li>
+        <li>Clínicas ativas e retenção mensal <span class="hyp">hipótese</span></li>
+      </ul>
+    </section>
+
+    <section class="block puv">
+      <span class="badge" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="8" width="18" height="4" rx="1"/><path d="M12 8v13M19 12v7a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2v-7"/><path d="M7.5 8a2.5 2.5 0 0 1 0-5C10 3 12 8 12 8s2-5 4.5-5a2.5 2.5 0 0 1 0 5"/></svg></span>
+      <div class="part">
+        <h2>Proposta única de valor</h2>
+        <p class="big">Agenda sem marcação dupla, lembretes que reduzem faltas e prontuário com contrato assinado, num app que o paciente instala sem loja.</p>
+      </div>
+      <div class="part">
+        <h2>Conceito de alto nível</h2>
+        <p>A agenda e o prontuário da clínica de estética na tela inicial do celular.</p>
+      </div>
+    </section>
+
+    <section class="block vantagem">
+      <span class="badge" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20 15 9"/><path d="M15 4v2M15 12v2M11 8h2M17 8h2M19 4l-1 1M19 12l-1-1"/></svg></span>
+      <h2>Vantagem injusta</h2>
+      <ul>
+        <li>Agenda, prontuário e contrato ligados ao mesmo atendimento, num só lugar</li>
+        <li>Histórico de evolução acumulado por paciente, que dificulta a troca de sistema <span class="hyp">hipótese</span></li>
+        <li class="note">Trava de horário e lembretes são copiáveis: a vantagem real ainda precisa ser validada</li>
+      </ul>
+    </section>
+
+    <section class="block canais">
+      <span class="badge" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="8" y="8" width="8" height="8" rx="1"/><circle cx="4" cy="4" r="2" fill="currentColor"/><circle cx="20" cy="4" r="2" fill="currentColor"/><circle cx="4" cy="20" r="2" fill="currentColor"/><circle cx="20" cy="20" r="2" fill="currentColor"/><path d="M5.5 5.5 8 8M18.5 5.5 16 8M5.5 18.5 8 16M18.5 18.5 16 16"/></svg></span>
+      <h2>Canais</h2>
+      <ul>
+        <li>Link do PWA, instalável na tela inicial sem loja <span class="ref">HU05</span></li>
+        <li>Lembretes por WhatsApp e e-mail como contato recorrente com o paciente</li>
+        <li>Link de agendamento divulgado pela clínica nas redes sociais <span class="hyp">hipótese</span></li>
+        <li>Venda direta e indicação entre clínicas <span class="hyp">hipótese</span></li>
+      </ul>
+    </section>
+
+    <section class="block segmentos">
+      <span class="badge" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor" stroke="none"><circle cx="12" cy="7.5" r="4.5"/><path d="M3 21a9 7 0 0 1 18 0z"/></svg></span>
+      <div class="part">
+        <h2>Segmentos de clientes</h2>
+        <ul>
+          <li><strong>Clínicas de estética</strong>: quem contrata; gestor ou administrador</li>
+          <li><strong>Profissionais e esteticistas</strong>: grade, prontuário e contratos</li>
+          <li><strong>Recepção</strong>: agenda e acompanha confirmações</li>
+          <li><strong>Pacientes</strong>: agendam, confirmam e assinam</li>
+        </ul>
+      </div>
+      <div class="part">
+        <h2>Primeiros clientes</h2>
+        <ul>
+          <li>Clínicas pequenas e médias, com mais de um profissional, que fazem procedimentos invasivos <span class="hyp">hipótese</span></li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="block custos">
+      <span class="badge" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M3 4a1 1 0 0 1 1-1h7.6a1 1 0 0 1 .7.3l8.4 8.4a1 1 0 0 1 0 1.4l-7.6 7.6a1 1 0 0 1-1.4 0L3.3 12.3a1 1 0 0 1-.3-.7z"/><circle cx="8" cy="8" r="1.6" fill="var(--c-base)"/></svg></span>
+      <h2>Estrutura de custos</h2>
+      <div class="cols">
+        <ul>
+          <li>Desenvolvimento e manutenção da plataforma</li>
+          <li>Hospedagem com alta disponibilidade para acessos simultâneos à agenda</li>
+          <li>Armazenamento criptografado de fotos e documentos</li>
+        </ul>
+        <ul>
+          <li>Custo por mensagem no canal oficial do WhatsApp <span class="ref">PA07</span></li>
+          <li>Serviço de e-mail transacional</li>
+          <li>Jurídico e DPO: modelos de contrato, termos LGPD e validade da assinatura <span class="ref">PD07–09</span></li>
+          <li>Suporte e implantação nas clínicas <span class="hyp">hipótese</span></li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="block receita">
+      <span class="badge" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="6" width="20" height="12" rx="2"/><circle cx="12" cy="12" r="2.5"/><path d="M6 12h.01M18 12h.01"/></svg></span>
+      <h2>Fontes de receita</h2>
+      <div class="cols">
+        <ul>
+          <li>Assinatura mensal por clínica ou por profissional <span class="hyp">hipótese</span></li>
+          <li>Pacote de mensagens WhatsApp por volume <span class="hyp">hipótese</span></li>
+        </ul>
+        <ul>
+          <li>Plano superior com as entregas futuras: construtor de anamnese, comparador de fotos, assinatura remota, marca d'água <span class="ref">PA01–17</span> <span class="hyp">hipótese</span></li>
+        </ul>
+      </div>
+      <p class="note" style="margin-top:10px">As fontes não definem modelo de receita; todos os itens são hipóteses.</p>
+    </section>
+  </main>
+
+  <footer>Fonte: especificação funcional do projeto e proposta "Arquitetura, módulos e funcionalidades" (10/10/2026). Os itens marcados como hipótese precisam ser validados com clínicas.</footer>
+</div>
